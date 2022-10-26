@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { IGallery } from './models/gallery';
+import {gallery as data} from './data/gallery'
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'TestZadAquaRD';
+
+  gallery: IGallery[] = data;
 }
