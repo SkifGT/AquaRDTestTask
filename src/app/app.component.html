@@ -1,6 +1,5 @@
 <h1>Zadanie testowe AquaRD</h1>
+<p *ngIf="loading" class="loading-text">Loading....</p>
 <div class="container">
-  <app-gallery
-    [gallery]="gallery[0]"
-  ></app-gallery>
+  <app-gallery *ngFor="let photo of gallery" [gallery]="photo"></app-gallery>
 </div>
