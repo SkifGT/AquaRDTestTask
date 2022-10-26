@@ -1,6 +1,7 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { ErrorService } from './error.service';
+import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, delay, Observable, retry, throwError } from 'rxjs';
 import { IGallery } from '../models/gallery';
 
 @Injectable({
@@ -8,10 +9,25 @@ import { IGallery } from '../models/gallery';
 })
 
 export class GalleryService {
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private errorService: ErrorService
+    ) {
   }
 
   getAll(): Observable<IGallery[]>{
-    return this.http.get<IGallery[]>("https://jsonplaceholder.typicode.com/photos")
+    return this.http.get<IGallery[]>("https://jsonplaceholder.typicode.com/photos").pipe(
+      delay(200),
+      retry(2),
+      catchError(this.errorHandler.bind(this))
+    )
   }
+
+  private errorHandler(error: HttpErrorResponse) {
+    this.errorService.handle(error.message)
+    return throwError(()=>error.message)
+
+  }
+
+
 }

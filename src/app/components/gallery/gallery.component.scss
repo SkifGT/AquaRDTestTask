@@ -1,10 +1,11 @@
 .card {
-  width: 200px;
+  width: 156px;
   height: 250px;
   display: flex;
   flex-direction: column;
   border: 1px solid black;
   border-radius: 2px;
+  margin: 2px;
 
 }
 .card--img {
@@ -13,4 +14,7 @@
   margin: 3px;
 }
 .card--title {
+  margin-top: 3px;
+  font-weight: 600;
+  padding: 0 5px;
 }
