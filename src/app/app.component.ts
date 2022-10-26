@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   constructor (private galleryService: GalleryService){
 
   }
+  p: number = 1;
 
   title = 'TestZadAquaRD';
 
@@ -26,6 +27,7 @@ export class AppComponent implements OnInit {
       this.gallery = gall
       this.loading = false;
     })
+
     // throw new Error('Method not implemented.');
   }
 
