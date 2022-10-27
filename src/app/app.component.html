@@ -13,10 +13,9 @@
 
 <div >
   <div *ngIf="gallery$ | async as gallerys"class="container" >
-    <app-gallery *ngFor="let photo of gallerys | filterImage: term " [gallery]="photo">
+    <app-gallery *ngFor="let photo of gallerys | filterImage: term | paginate: { itemsPerPage: 50, currentPage: p } " [gallery]="photo">
     </app-gallery>
   </div>
-  <!-- | paginate: { itemsPerPage: 50, currentPage: p } -->
 </div>
 
-<!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+<pagination-controls (pageChange)="p = $event"></pagination-controls>
