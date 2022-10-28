@@ -1,4 +1,30 @@
-<div class="card">
-  <img [src]="gallery.thumbnailUrl" [alt]="gallery.title" class="card--img">
-  <h4 class="card--title">{{ gallery.title }}</h4>
+<div class="searchBar">
+  <input
+  type="text"
+  placeholder="Search image..."
+  [(ngModel)]="term"
+  >
+  <div class="form-select">
+    <select
+    [ngModel]="albumSelectedId"
+    (ngModelChange)="onAlbumChange($event)"
+    >
+      <option value="-1">Select Gallery</option>
+      <option *ngFor="let album of albums_id$ | async " [value]="album">{{album}}</option>
+    </select>
+  </div>
 </div>
+
+<p *ngIf="loading" class="loading-text">Loading....</p>
+
+<div *ngIf="albums$ | async as albums "class="container">
+  <div  class="card" *ngFor="let album of albums | filterImage: term | paginate: { itemsPerPage: 50, currentPage: p }  ">
+    <img [src]="album.thumbnailUrl" alt="...">
+    <h5>{{album.title}}</h5>
+    <p>
+      Album № - {{album.albumId}}
+    </p>
+  </div>
+</div>
+
+<pagination-controls (pageChange)="p = $event"></pagination-controls>

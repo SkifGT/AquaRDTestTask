@@ -1,5 +1,5 @@
 import { ErrorService } from './error.service';
-import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, delay, Observable, retry, throwError } from 'rxjs';
 import { IGallery } from '../models/gallery';
@@ -26,8 +26,6 @@ export class GalleryService {
   private errorHandler(error: HttpErrorResponse) {
     this.errorService.handle(error.message)
     return throwError(()=>error.message)
-
   }
-
 
 }

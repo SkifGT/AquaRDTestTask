@@ -1,21 +1,7 @@
 <app-global-error></app-global-error>
 
-<h1>Zadanie testowe AquaRD</h1>
+<header>
+  <h2>Zadanie testowe AquaRD</h2>
+</header>
 
-<input
-  type="text"
-  class="searchInput"
-  placeholder="Search image..."
-  [(ngModel)]="term"
-  >
-
-<p *ngIf="loading" class="loading-text">Loading....</p>
-
-<div >
-  <div *ngIf="gallery$ | async as gallerys"class="container" >
-    <app-gallery *ngFor="let photo of gallerys | filterImage: term | paginate: { itemsPerPage: 50, currentPage: p } " [gallery]="photo">
-    </app-gallery>
-  </div>
-</div>
-
-<pagination-controls (pageChange)="p = $event"></pagination-controls>
+<app-gallery></app-gallery>
